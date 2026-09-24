@@ -1,0 +1,21 @@
+# Copyright 2026 Matt Harrison
+# SPDX-License-Identifier: Apache-2.0
+
+# yaml-language-server: $schema=../../spore-os-protocol/versions/v0d2/spore.manifest.v0.schema.yaml
+
+id: dev.sporeos.store
+name: Store
+description: The Spore OS store.
+trust: standard
+
+version: 0.1.0
+schema: SPORE/v0d2
+app: ./store
+
+launch: lazy
+namespace: hyphae
+
+api: []
+topics: []
+permissions: []
+errors: []
