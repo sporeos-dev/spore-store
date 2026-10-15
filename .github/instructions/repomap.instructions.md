@@ -1,3 +1,6 @@
+---
+description: "Use when locating Spore OS repositories, components, client libraries, nodes, specifications, installation tooling, or release artifacts."
+---
 
 # Repository Map
 All potentially relevant repos of the Spore OS project.
