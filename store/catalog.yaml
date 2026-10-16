@@ -1,7 +1,6 @@
 nodes:
   
-  - 
-    repo: sporeos-dev/foundry-releases
+  - repo: sporeos-dev/foundry-releases
     state: alpha
     manifest: alias.manifest.spore.yaml
     product: alias
