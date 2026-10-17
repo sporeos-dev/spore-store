@@ -1,17 +1,16 @@
 nodes:
   
-  - 
-    repo: sporeos-dev/foundry-releases
+  - repo: sporeos-dev/foundry-releases
     state: alpha
     manifest: alias.manifest.spore.yaml
     product: alias
     id: dev.sporeos.foundry.alias
     name: Alias
-    version: 0.1.27
+    version: 0.1.29
     description: An easy-to-use terminal aliasing mechanism that simplifies execution and manages context.
-    checksum: sha256:2dadbf545f481300ab9c4ae09b68f1ac3f16aade1130663c68746ffd152a35c5
-    date: 2026-10-16
-    time: 22:43:30
+    checksum: sha256:d60d1369e85a2c4e60770dcdb696f7fd108b4fc69a97aaf30b30e63f781bd1c5
+    date: 2026-10-17
+    time: 11:59:04
     releases:
       - opsys: macos
         arch: arm64
