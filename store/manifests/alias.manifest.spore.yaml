@@ -4,10 +4,10 @@
 id: dev.sporeos.foundry.alias
 name: Alias
 description: An easy-to-use terminal aliasing mechanism that simplifies execution and manages context.
-trust: developer
+trust: standard
 
 schema: SPORE/v0d2
-version: 0.1.31
+version: 0.1.32
 app: ./foundry-alias
 
 roles:

@@ -6,11 +6,11 @@ nodes:
     product: alias
     id: dev.sporeos.foundry.alias
     name: Alias
-    version: 0.1.31
+    version: 0.1.32
     description: An easy-to-use terminal aliasing mechanism that simplifies execution and manages context.
-    checksum: sha256:e7c40ac18d9ebe92f37f81e4fc19d3d35fb42a3c688be8899f2bd0de0052636c
+    checksum: sha256:f89e0e52b8c63b6d78cb92edd95e374f0a7ffc28d64c9b1d7b16f3193a3027af
     date: 2026-10-17
-    time: 12:59:59
+    time: 13:36:39
     releases:
       - opsys: macos
         arch: arm64
