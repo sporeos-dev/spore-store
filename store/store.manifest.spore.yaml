@@ -13,7 +13,7 @@ schema: SPORE/v0d2
 app: ./store
 
 launch: lazy
-namespace: hyphae
+namespace: spore
 
 api: 
   - name: refresh
@@ -63,7 +63,7 @@ api:
     outputs:
       - name: path
         type: string
-        description: Path to the retrieved node from the store.
+        description: Path to the retrieved node manifest in the store.
   
 topics: []
 permissions: []
