@@ -1,6 +1,4 @@
-# Copyright 2026 Matt Harrison
-# SPDX-License-Identifier: Apache-2.0
-
+# Copyright (c) Spore OS contributors. All rights reserved.
 
 # yaml-language-server: $schema=../../spore-os-protocol/versions/v0d2/spore.manifest.v0.schema.yaml
 
@@ -10,7 +8,7 @@ description: An easy-to-use terminal aliasing mechanism that simplifies executio
 trust: standard
 
 schema: SPORE/v0d2
-version: 0.1.32
+version: 0.1.33
 app: ./foundry-alias
 
 roles:
@@ -33,7 +31,7 @@ api:
         required: true
       - name: path
         type: string
-        description: The path to the script that the alias will execute.
+        description: The path to the script that the alias will execute. Adding the alias grants the script execute permission.
         required: true
       - name: description
         type: string
