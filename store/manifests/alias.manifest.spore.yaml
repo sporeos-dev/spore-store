@@ -8,7 +8,7 @@ description: An easy-to-use terminal aliasing mechanism that simplifies executio
 trust: standard
 
 schema: SPORE/v0d2
-version: 0.1.33
+version: 0.1.36
 app: ./foundry-alias
 
 roles:
