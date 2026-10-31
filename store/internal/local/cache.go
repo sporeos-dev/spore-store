@@ -45,23 +45,24 @@ type Catalog struct {
 }
 
 type Node struct {
-	Repo        string    `yaml:"repo"`
-	State       string    `yaml:"state"`
-	Manifest    string    `yaml:"manifest"`
-	Product     string    `yaml:"product"`
-	ID          string    `yaml:"id"`
-	Name        string    `yaml:"name"`
-	Version     string    `yaml:"version"`
-	Description string    `yaml:"description"`
-	Checksum    string    `yaml:"checksum"`
-	Date        string    `yaml:"date"`
-	Time        string    `yaml:"time"`
-	Releases    []Release `yaml:"releases"`
+	Repo        string            `yaml:"repo"`
+	State       string            `yaml:"state"`
+	Manifest    string            `yaml:"manifest"`
+	Product     string            `yaml:"product"`
+	ID          string            `yaml:"id"`
+	Name        string            `yaml:"name"`
+	Version     string            `yaml:"version"`
+	Description string            `yaml:"description"`
+	Checksums   map[string]string `yaml:"checksums"`
+	Date        string            `yaml:"date"`
+	Time        string            `yaml:"time"`
+	Releases    []Release         `yaml:"releases"`
 }
 
 type Release struct {
 	OpSys     string     `yaml:"opsys"`
 	Arch      string     `yaml:"arch"`
+	Version   string     `yaml:"version"`
 	Artifacts []Artifact `yaml:"artifacts"`
 }
 
@@ -473,6 +474,14 @@ func (c *Cache) Get(req *request.Request) {
 			response.Error(req.Command(), req.Handle(), "GetFailed", err.Error()))
 		return
 	}
+	manifestChecksum, ok := node.Checksums[release.Version]
+	if !ok || manifestChecksum == "" {
+		c.client.SendResponseError(
+			response.Error(req.Command(), req.Handle(), "GetFailed",
+				fmt.Sprintf("node %q has no manifest checksum for version %q",
+					node.ID, release.Version)))
+		return
+	}
 
 	manifestName, err := safeFilename(node.Manifest)
 	if err != nil {
@@ -528,7 +537,7 @@ func (c *Cache) Get(req *request.Request) {
 	}
 
 	manifestPath := filepath.Join(nodeDir, manifestName)
-	if err := verifySHA256(manifestPath, node.Checksum); err != nil {
+	if err := verifySHA256(manifestPath, manifestChecksum); err != nil {
 		c.client.SendResponseError(
 			response.Error(req.Command(), req.Handle(), "GetFailed",
 				fmt.Sprintf("verify manifest checksum: %v", err)))
@@ -567,6 +576,10 @@ func (n *Node) platformArtifact() (*Release, *Artifact, error) {
 		}
 		return nil, nil, fmt.Errorf("node %q has %d artifacts for %s/%s, want exactly one",
 			n.ID, artifacts, runtime.GOOS, runtime.GOARCH)
+	}
+	if matched.Version == "" {
+		return nil, nil, fmt.Errorf("node %q has no version for %s/%s release",
+			n.ID, runtime.GOOS, runtime.GOARCH)
 	}
 	return matched, &matched.Artifacts[0], nil
 }

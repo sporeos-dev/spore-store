@@ -40,6 +40,33 @@ nodes:
 	}
 }
 
+func TestOnLoadLoadsVersionedManifestChecksums(t *testing.T) {
+	cache := New(nil)
+	res := response.New("dev.sporeos.SPORE.state.retrieve", "load-cache").
+		WithArg("body", `
+nodes:
+  - id: dev.sporeos.example
+    version: 0.1
+    checksums:
+      0.1.37: sha256:manifest37
+      0.1.25: sha256:manifest25
+    releases:
+      - opsys: macos
+        arch: arm64
+        version: 0.1.37
+`)
+
+	cache.OnLoad(res, nil)
+
+	node := cache.Nodes[0]
+	if node.Version != "0.1" || node.Checksums["0.1.37"] != "sha256:manifest37" {
+		t.Fatalf("versioned manifest checksums were not loaded: %#v", node)
+	}
+	if node.Releases[0].Version != "0.1.37" {
+		t.Fatalf("release build version was not loaded: %#v", node.Releases[0])
+	}
+}
+
 func TestBrowseNodesFiltersForCurrentPlatform(t *testing.T) {
 	cache := &Cache{
 		Catalog: Catalog{
