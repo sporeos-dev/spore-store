@@ -544,7 +544,11 @@ func (c *Cache) Get(req *request.Request) {
 		return
 	}
 
-	artifactPath := filepath.Join(nodeDir, artifactName)
+	artifactFile := artifactName
+	if runtime.GOOS == "windows" {
+		artifactFile += ".exe"
+	}
+	artifactPath := filepath.Join(nodeDir, artifactFile)
 	if err := verifySHA256(artifactPath, artifact.Checksum); err != nil {
 		c.client.SendResponseError(
 			response.Error(req.Command(), req.Handle(), "GetFailed",
@@ -631,6 +635,12 @@ func platformStoreDirectory() (string, error) {
 		return "/Library/Application Support/spore-os/store", nil
 	case "linux":
 		return "/var/lib/spore-os/store", nil
+	case "windows":
+		programData := os.Getenv("ProgramData")
+		if programData == "" {
+			return "", fmt.Errorf("ProgramData environment variable is not set")
+		}
+		return filepath.Join(programData, "spore-os", "store"), nil
 	default:
 		return "", fmt.Errorf("unsupported operating system %q", runtime.GOOS)
 	}
