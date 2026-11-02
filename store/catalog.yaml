@@ -17,8 +17,9 @@ nodes:
       0.1.39: sha256:5dd76207e8f097d2b28e0b4a8015808636f44b4290043227b8cc765ff016570a
       0.1.40: sha256:21e3c8cb3e651b4575aa62c475107138c8bf1b2069980057f39b03c73d7a01f2
       0.1.41: sha256:47e9ce6959c4b94d10a544078aa65b844c1c24f88cbe9eafb763d2cb2bd3ccfd
+      0.1.42: sha256:43fb180ee0596800b48b2cbe502723cc1d16d8cadd4a2f191da08139d79c5bc7
     date: 2026-11-01
-    time: 16:45:06
+    time: 23:08:38
     releases:
       - opsys: linux
         arch: arm64
@@ -34,7 +35,7 @@ nodes:
             checksum: sha256:32070916069df3f394e5ee6ebf6df59a10bc819d37db070d7d41a8208849094b
       - opsys: windows
         arch: arm64
-        version: 0.1.35
+        version: 0.1.42
         artifacts:
           - name: foundry-alias.exe
             checksum: sha256:e9d92d5c21129939a1b5ec9d5048f704957d7a249ce514552626debfc137c688
